@@ -1,0 +1,25 @@
+.form-login {
+    background: white;
+    padding: 10px 20px;
+    margin-top: 50px;
+    border-radius: 3px;
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.1);
+    h2 {
+      font-size: 25px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    h4{
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+    .btn {
+      width: 100%;
+      margin-bottom: 20px
+    }
+    .iti {
+      width: 100%;
+    }
+  }
+  
