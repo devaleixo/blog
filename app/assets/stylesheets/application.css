@@ -9,6 +9,11 @@
  * Consider organizing styles into separate files for maintainability.
  */
  @import url('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css');
+ 
  @import "components/navbar";
  @import "components/alert";
  @import "components/form_login";
+ @import "components/card";
+
+ @import "actiontext";
+ @import "trix/dist/trix";
