@@ -133,6 +133,8 @@ GEM
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
     ffi (1.17.0-x86_64-linux-gnu)
+    font-awesome-rails (4.7.0.9)
+      railties (>= 3.2, < 9.0)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -378,6 +380,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  font-awesome-rails
   i18n
   image_processing (~> 1.2)
   importmap-rails

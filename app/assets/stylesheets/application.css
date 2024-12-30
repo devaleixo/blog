@@ -15,6 +15,8 @@
  @import "components/form_login";
  @import "components/card";
  @import "components/banner";
+ @import "components/footer";
 
  @import "actiontext";
  @import "trix/dist/trix";
+ @import "font-awesome";
