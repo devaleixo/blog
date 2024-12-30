@@ -16,7 +16,7 @@ class ArticlesController < ApplicationController
   
     def create
       @article = Article.new(article_params)
-      @article.user = current_user
+      @article.author = current_user
       authorize @article
       if @article.save
         redirect_to @article, notice: 'O artigo foi criado com sucesso.'
@@ -49,7 +49,7 @@ class ArticlesController < ApplicationController
   
       # Only allow a trusted parameter "white list" through.
       def article_params
-        params.require(:article).permit(:title, :rich_body)
+        params.require(:article).permit(:title, :rich_body, :photo)
       end
   end
   

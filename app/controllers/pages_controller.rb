@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-    @articles = Article.order(created_at: :desc).page(params[:page]).per(3)
+    @articles = Article.order(created_at: :desc)
   end
 end

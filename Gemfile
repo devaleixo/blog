@@ -35,7 +35,8 @@ gem "simple_form"
 gem "devise"
 gem "pundit"
 gem "i18n"
-
+gem "dotenv-rails"
+gem "cloudinary"
 # Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
 gem "kamal", require: false
 
