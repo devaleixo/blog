@@ -14,6 +14,7 @@
  @import "components/alert";
  @import "components/form_login";
  @import "components/card";
+ @import "components/banner";
 
  @import "actiontext";
  @import "trix/dist/trix";
