@@ -2,4 +2,9 @@
 <h2 class="text-center font-weight-bold mb-2"><%= @article.title %></h2>
 <%= cl_image_tag @article.photo.key, height: 300, width: 400, crop: :fill %>
 <%= @article.rich_body %>
+
+<%= simple_form_for([@article, @comment]) do |f| %>
+  <%= f.input :content, label: 'Comente!' %>
+  <%= f.button :submit %>
+<% end %>
 </div>

@@ -1,9 +1,11 @@
 class ArticlesController < ApplicationController
     before_action :set_article, only: [:show, :edit, :update, :destroy]
-
+    skip_before_action :authenticate_user!, only: [:show]
   
     def show
         authorize @article
+        @comments = Comment.where(article_id: params[:id]).order(created_at: :asc)
+        @comment = Comment.new
     end
   
     def new
