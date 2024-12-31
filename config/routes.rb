@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  get "taggings/create"
-  get "tags/create"
-  get "comments/create"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -13,6 +10,7 @@ Rails.application.routes.draw do
   
   resources :articles, except: :index do
     resources :comments, only: :create
+    resources :taggings, only: :create
   end
   resources :tags, only: :create
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
