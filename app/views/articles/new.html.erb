@@ -1,4 +1,7 @@
 <div class="container">
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Criar Tag 
+</button>
   <%= simple_form_for(@article) do |f| %>
     <div class="form-inputs">
       <%= f.input :title, label: "Título:" %>
@@ -14,15 +17,11 @@
     </div>
   <% end %>
 
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Criar Tag 
-</button>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Criar uma Tag</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       
@@ -31,7 +30,7 @@
         <%= f.input :title, label: "Nome:"%>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
         <%= f.button :submit, :class => "btn btn-primary", label: "Criar" %>
       </div>
       <% end %>
