@@ -1,6 +1,8 @@
 class Article < ApplicationRecord
   belongs_to :author, class_name: "User"
-  
+
+  has_many :tags, through: :taggings
+  has_many :taggings, dependent: :destroy
   has_many :comments
 
   has_rich_text :rich_body
