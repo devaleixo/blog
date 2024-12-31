@@ -10,7 +10,9 @@ class ArticlesController < ApplicationController
   
     def new
       @article = Article.new
+      @tagging = Tagging.new
       @tag = Tag.new
+      @tags = Tag.all.order(:title)
       authorize @article
     end
   
@@ -25,6 +27,11 @@ class ArticlesController < ApplicationController
         redirect_to @article, notice: 'O artigo foi criado com sucesso.'
       else
         render :new
+      end
+      if params[:article][:tag_ids]
+        params[:article][:tag_ids].each do |tag_id|
+          Tagging.create(article: @article, tag: Tag.find(tag_id))
+        end
       end
     end
   

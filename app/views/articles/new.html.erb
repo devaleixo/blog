@@ -6,10 +6,20 @@
     <div class="form-inputs">
       <%= f.input :title, label: "Título:" %>
     </div>
+    
 
     <div class="form-inputs">
       <%= f.rich_text_area :rich_body %>
       <%= f.input :photo, as: :file %>
+    </div>
+  
+    <div class="form-inputs">
+      <% if @tags.any? %>
+        <% @tags.each do |tag| %>
+          <%= check_box_tag "article[tag_ids][]", tag.id, @article.tag_ids.include?(tag.id), id: dom_id(tag) %>
+          <%= label_tag dom_id(tag), tag.title %>
+        <% end %>
+      <% end %>
     </div>
   
     <div class="form-actions">
