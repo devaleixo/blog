@@ -33,11 +33,30 @@ RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Install application gems
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    wget \
+    manpages-dev \
+    bison \
+    gawk \
+    python3 \
+    python3-pip \
+    && rm -rf /var/lib/apt/lists/*
+
+# Baixe, compile e instale o glibc 2.34
+RUN wget http://ftp.gnu.org/gnu/libc/glibc-2.34.tar.gz && \
+    tar -xvzf glibc-2.34.tar.gz && \
+    cd glibc-2.34 && \
+    mkdir build && cd build && \
+    ../configure --prefix=/opt/glibc-2.34 && \
+    make -j$(nproc) && \
+    make install && \
+    cd / && rm -rf glibc-2.34*
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
+
 
 # Copy application code
 COPY . .
