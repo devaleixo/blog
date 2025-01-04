@@ -82,8 +82,9 @@ production:
   primary: &primary_production
     <<: *default
     database: blog_maino_production
-    username: blog_maino
-    password: <%= ENV["BLOG_MAINO_DATABASE_PASSWORD"] %>
+    username: <%= ENV["POSTGRES_USER"] %>
+    password: <%= ENV["POSTGRES_PASSWORD"] %>
+    host: <%= ENV["DB_HOST"] %>
   cache:
     <<: *primary_production
     database: blog_maino_production_cache

@@ -1,0 +1,1 @@
+CREATE DATABASE blog_maino_production;
