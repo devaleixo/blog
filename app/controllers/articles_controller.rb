@@ -50,6 +50,29 @@ class ArticlesController < ApplicationController
       @article.destroy
       redirect_to root_path, notice: 'O artigo foi excluído com sucesso.'
     end
+
+    def import
+      if params[:file].present?
+        ArticleImportJob.perform_later(params[:file].path)
+        redirect_to articles_path, notice: 'Import job has been enqueued.'
+      else
+        redirect_to articles_path, alert: 'Please upload a file.'
+      end
+    end
+        else
+          redirect_to articles_path, alert: 'Please upload a file.'
+        end
+      end
+    rescue => e
+      redirect_to articles_path, alert: "Error importing articles: #{e.message}"
+    end
+  else
+    redirect_to articles_path, alert: 'Please upload a file.'
+  end
+end
+
+    def imports
+    end
   
     private
       # Use callbacks to share common setup or constraints between actions.
