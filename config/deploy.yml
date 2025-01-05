@@ -19,6 +19,11 @@ servers:
 proxy:
   ssl: true
   host: blog.devaleixo.com
+  app_port: 3000
+  healthcheck:
+    path: /up
+    interval: 7
+    timeout: 49
 
 # Credentials for your image host.
 registry:
