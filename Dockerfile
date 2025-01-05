@@ -1,91 +1,69 @@
 # syntax=docker/dockerfile:1
 # check=error=true
 
-# This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
+# Esta imagem Docker é projetada para produção, não para desenvolvimento.
+# Use com Kamal ou construa e execute manualmente:
 # docker build -t blog_maino .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name blog_maino blog_maino
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<valor de config/master.key> --name blog_maino blog_maino
 
-# For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
+# Para um ambiente de desenvolvimento em contêiner, consulte Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
-# Make sure RUBY_VERSION matches the Ruby version in .ruby-version
-ARG RUBY_VERSION=3.2.0
-FROM docker.io/library/ruby:$RUBY_VERSION-slim AS base
+# Certifique-se de que RUBY_VERSION corresponda à versão do Ruby em .ruby-version
+ARG RUBY_VERSION=3.2
+FROM ruby:$RUBY_VERSION-bookworm AS base
 
-# Rails app lives here
+# O aplicativo Rails reside aqui
 WORKDIR /rails
 
-# Install base packages
+# Instalar pacotes base
 RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client libc6 && \
+    apt-get install --no-install-recommends -y curl libjemalloc2 libvips postgresql-client && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-# Set production environment
+# Definir ambiente de produção
 ENV RAILS_ENV="production" \
     BUNDLE_DEPLOYMENT="1" \
     BUNDLE_PATH="/usr/local/bundle" \
     BUNDLE_WITHOUT="development"
 
-# Throw-away build stage to reduce size of final image
+# Estágio de construção para reduzir o tamanho da imagem final
 FROM base AS build
 
-# Install packages needed to build gems
+# Instalar pacotes necessários para construir gems
 RUN apt-get update -qq && \
     apt-get install --no-install-recommends -y build-essential git libpq-dev pkg-config && \
     rm -rf /var/lib/apt/lists /var/cache/apt/archives
 
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    wget \
-    manpages-dev \
-    bison \
-    gawk \
-    python3 \
-    python3-pip \
-    && rm -rf /var/lib/apt/lists/*
-
-# Baixe, compile e instale o glibc 2.34
-RUN wget http://ftp.gnu.org/gnu/libc/glibc-2.34.tar.gz && \
-    tar -xvzf glibc-2.34.tar.gz && \
-    cd glibc-2.34 && \
-    mkdir build && cd build && \
-    ../configure --prefix=/opt/glibc-2.34 && \
-    make -j$(nproc) && \
-    make install && \
-    cd / && rm -rf glibc-2.34*
 COPY Gemfile Gemfile.lock ./
 RUN bundle install && \
     rm -rf ~/.bundle/ "${BUNDLE_PATH}"/ruby/*/cache "${BUNDLE_PATH}"/ruby/*/bundler/gems/*/.git && \
     bundle exec bootsnap precompile --gemfile
 
-
-# Copy application code
+# Copiar código do aplicativo
 COPY . .
 
-# Precompile bootsnap code for faster boot times
+# Pré-compilar código do bootsnap para tempos de inicialização mais rápidos
 RUN bundle exec bootsnap precompile app/ lib/
 
-# Precompiling assets for production without requiring secret RAILS_MASTER_KEY
+# Pré-compilar assets para produção sem exigir a chave secreta RAILS_MASTER_KEY
 RUN SECRET_KEY_BASE_DUMMY=1 ./bin/rails assets:precompile
 
-
-
-
-# Final stage for app image
+# Estágio final para a imagem do aplicativo
 FROM base
 
-# Copy built artifacts: gems, application
+# Copiar artefatos construídos: gems, aplicativo
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
 COPY --from=build /rails /rails
 
-# Run and own only the runtime files as a non-root user for security
+# Executar e possuir apenas os arquivos de tempo de execução como um usuário não-root para segurança
 RUN groupadd --system --gid 1000 rails && \
     useradd rails --uid 1000 --gid 1000 --create-home --shell /bin/bash && \
     chown -R rails:rails db log storage tmp
 USER 1000:1000
 
-# Entrypoint prepares the database.
+# O ponto de entrada prepara o banco de dados.
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
-# Start server via Thruster by default, this can be overwritten at runtime
+# Iniciar o servidor via Thruster por padrão, isso pode ser sobrescrito em tempo de execução
 EXPOSE 82
 CMD ["./bin/thrust", "./bin/rails", "server"]
