@@ -65,5 +65,5 @@ USER 1000:1000
 ENTRYPOINT ["/rails/bin/docker-entrypoint"]
 
 # Iniciar o servidor via Thruster por padrão, isso pode ser sobrescrito em tempo de execução
-EXPOSE 82
+EXPOSE 3000
 CMD ["./bin/thrust", "./bin/rails", "server"]
