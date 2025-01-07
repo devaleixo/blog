@@ -117,10 +117,10 @@ accessories:
       - data:/var/lib/postgresql/data
     options:
       network: "private"
-#   redis:
-#     image: redis:7.0
-#     host: 192.168.0.2
-#     port: 6379
-#     directories:
-#       - data:/data
+  redis:
+    image: redis:7.0
+    host: 89.116.73.110
+    port: 6379
+    directories:
+      - data:/data
 asset_path: /rails/public/assets
