@@ -2,7 +2,7 @@ Blog Devaleixo
 
 Este projeto foi desenvolvido como parte de um desafio técnico para conseguir uma vaga em uma empresa. A solução inclui funcionalidades básicas solicitadas, que estão disponíveis após o login na barra de navegação (navbar), incluindo a funcionalidade de importação de artigos, sem estar logado o usuário pode ver os artigos publicados em ordem crescente, com paginação, selecionar um artigo e fazer comentários.
 
-Eu poderia ter construido um modelo para lidar com as importações, com um import_type, permitindo o import tanto de tags como de artigos, porém não tive disponibilidade de tempo para tal feito.
+Eu poderia ter construido um modelo para lidar com as importações, com um import_type, permitindo o import tanto de tags como de artigos e um action cable na criação de tags, para adicionar a listagem, e comentários, porém não tive disponibilidade de tempo para tais feitos.
 
 O projeto foi hospedado em um servidor VPS, como não tive tempo de configurar um reverse proxy com o kamal-proxy e solucionar o problema de portas deixei a seguinte configuração:
 
