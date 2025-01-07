@@ -11,11 +11,6 @@ class ArticleImportsJob < ApplicationJob
 
       title = lines[0]
       body = lines[1..].join("\n")
-      puts body
-      puts "================"
-      puts "================"
-      puts "================"
-      puts "================"
       Article.create!(title: title, rich_body: body, author: author)
     end
   rescue => e
