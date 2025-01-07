@@ -1,4 +1,4 @@
-class ArticleImportJob < ApplicationJob
+class ImportArticlesJob < ApplicationJob
   queue_as :default
 
   def perform(file_path)
