@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Importar Artigos</h2>
+
+  <!-- Dica para o usuário -->
+  <p><strong>Instruções:</strong> Para importar múltiplos artigos, cada artigo deve começar com o título, seguido do conteúdo. Os artigos devem ser separados por duas barras <code>//</code>. Exemplo:</p>
+
+  <pre>
+    Título do Artigo 1
+    Aqui vai o conteúdo do primeiro artigo.
+
+    //
+    Título do Artigo 2
+    Conteúdo do segundo artigo.
+  </pre>
+
+  <%= simple_form_for :article_import, url: import_articles_path, method: :post, html: { multipart: true } do |f| %>
+    <div class="form-group">
+      <%= f.input :file, as: :file, label: "Selecione um arquivo (.txt)", input_html: { accept: ".txt" } %>
+    </div>
+    <%= f.button :submit, "Importar Artigos", class: "btn btn-primary" %>
+  <% end %>
+</div>

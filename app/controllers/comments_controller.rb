@@ -11,6 +11,9 @@ class CommentsController < ApplicationController
       @comment.anonymous = true
     end
     @comment.save
+    respond_to do |format|
+      format.turbo_stream
+    end
   end
 
   private

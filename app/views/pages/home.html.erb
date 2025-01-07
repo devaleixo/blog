@@ -1,24 +1,21 @@
-<div class="banner mb-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://res.cloudinary.com/de2pldbhy/image/upload/v1735545138/development/05nlremsa7srbvxuasa9fvfbgpjm.jpg);">
+<div class="banner mb-4" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://res.cloudinary.com/de2pldbhy/image/upload/v1735686355/development/lrcap1r49bonv434j11frbm5z9xb.jpg);">
   <div class="container">
     <h1>Gabriel Aleixo <strong>Desenvolvedor RoR</strong></h1>
     <p>Tradução da lógica de negócios em lógica computacional</p>
-    <a class="btn btn-primary" href="https://devaleixo.com" target="_blank">Portfólio</a>
+    <p>(infelizmente o kamal-proxy usa a porta 80 e 443, não tive tempo de fazer um reverse proxy pra porta 443 do meu portifólio, então esta sem ssl)</p>
+    <a class="btn btn-primary" href="http://devaleixo.com:82" target="_blank">Portfólio</a>
   </div>
 </div>
 
 <div class="container">
 <div class="cards">
-  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/breakfast.jpg)">
-    Breakfast
-  </div>
-
-  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/lunch.jpg)">
-    Lunch
-  </div>
-
-  <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/dinner.jpg)">
-    Dinner
-  </div>
+  <% @articles.each do |article| %>
+    <%= link_to article_path(article) do %>
+      <div class="card-category" style="background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= article.photo.attached? ? cl_image_tag(article.photo.key) : "https://picsum.photos/200/300?random" %>)">
+        <%= article.title %>
+      </div>
+    <% end %>
+  <% end %>
 </div>
 
 </div>

@@ -1,10 +1,25 @@
 <div class="container">
-<h2 class="text-center font-weight-bold mb-2"><%= @article.title %></h2>
-<%= cl_image_tag @article.photo.key, height: 300, width: 400, crop: :fill %>
-<%= @article.rich_body %>
+  <h2 class="text-center font-weight-bold mb-2"><%= @article.title %></h2>
+  
+  <% if @article.photo.attached? %>
+    <%= cl_image_tag @article.photo.key, height: 300, width: 400, crop: :fill %>
+  <% else %>
+    <%= image_tag "https://picsum.photos/400/300?random", height: 300, width: 400 %>
+  <% end %>
+  
+  <%= @article.rich_body %>
 
-<%= simple_form_for([@article, @comment]) do |f| %>
-  <%= f.input :content, label: 'Comente!' %>
-  <%= f.button :submit %>
-<% end %>
+  <h3 class="mt-4">Comentários:</h3>
+  <div class="comments-section">
+    <% @comments.each do |comment| %>
+      <div class="comment mb-2">
+        <strong><%= comment.author ? comment.author.email : 'Anonimo' %>:</strong>
+        <p><%= comment.content %></p>
+      </div>
+    <% end %>
+  </div>
+    <%= simple_form_for([@article, @comment]) do |f| %>
+    <%= f.input :content, label: 'Comente!' %>
+    <%= f.button :submit %>
+  <% end %>
 </div>
