@@ -12,10 +12,11 @@
   <% @articles.each do |article| %>
     <%= link_to article_path(article) do %>
       <div class="card-category" style="background-size: cover; background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(<%= article.photo.attached? ? cl_image_tag(article.photo.key) : "https://picsum.photos/200/300?random" %>)">
-        <%= article.title %>
+        <span style="text-decoration: none"><%= article.title %></span>
       </div>
     <% end %>
   <% end %>
 </div>
-
+<%= link_to ' ←', url_for(page: @articles.prev_page), class: 'prev-page' if @articles.prev_page %>
+<%= link_to '→', url_for(page: @articles.next_page), class: 'next-page' if @articles.next_page %>
 </div>

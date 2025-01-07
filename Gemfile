@@ -39,6 +39,7 @@ gem "dotenv-rails"
 gem "cloudinary"
 gem 'sidekiq'
 gem "font-awesome-rails"
+gem 'kaminari'
 # Deploy this application anywhere as a Docker container [https://kamal-deploy.org]
 gem "kamal", require: false
 
