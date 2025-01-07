@@ -1,21 +1,29 @@
 Blog Devaleixo
 
-Este projeto foi desenvolvido como parte de um desafio técnico para conseguir uma vaga em uma empresa. A solução inclui funcionalidades básicas solicitadas, que estão disponíveis após o login na barra de navegação (navbar), incluindo a funcionalidade de importação de artigos, sem estar logado o usuário pode ver os artigos publicados em ordem crescente, com paginação, selecionar um artigo e fazer comentários.
+Este projeto foi desenvolvido como parte de um desafio técnico para uma vaga em uma empresa. A solução inclui as funcionalidades básicas solicitadas, disponíveis após o login na barra de navegação (navbar). O usuário pode importar artigos, visualizar artigos publicados em ordem crescente com paginação e, sem estar logado, pode selecionar um artigo e fazer comentários.
 
-Eu poderia ter construido um modelo para lidar com as importações, com um import_type, permitindo o import tanto de tags como de artigos, porém não tive disponibilidade de tempo para tal feito.
+Embora eu tenha considerado construir um modelo para lidar com as importações (incluindo tipos de importação como tags e artigos), além de implementar Action Cable para adicionar tags dinamicamente, e internacionalização com a gem i18n, esses recursos não foram implementados devido à falta de tempo. No entanto, já utilizei essas técnicas em outros projetos.
 
-O projeto foi hospedado em um servidor VPS, como não tive tempo de configurar um reverse proxy com o kamal-proxy e solucionar o problema de portas deixei a seguinte configuração:
+Infraestrutura e Desafios
 
-* Portfólio: http://devaleixo.com:82
- * O portfólio está com a porta 9443 para ssl
-* Blog Devaleixo: https://blog.devaleixo.com
+O projeto foi hospedado em um servidor VPS. Como não tive tempo para configurar o reverse proxy com o kamal-proxy e resolver problemas de portas, deixei a seguinte configuração:
 
-  Tive alguns problemas que atrasaram bastante o desenvolvimento, como:
-1)Tive um problema no meu WSL com a versão de outra biblioteca para começar o projeto utilizando o rails 8, até identificar e começar o projeto levei algumas horas.
-2) Dockerfile do projeto com uma versão antiga do Debian, o thruster exige o libc6 com a versão 2.34, e o meu Dockerfile estava puxando a versão 10 do Debian, a biblioteca estava na versão 2.31, demorei bastante até perceber que isso não poderia ser atualizado na mão e que deveria fazer o meu Dockerfile from RubyVersion_bookworm(versão 11 do Debian)
+Portfólio: http://devaleixo.com:82
+(Porta 9443 configurada para SSL)
 
-Tive que consiliar a construção do projeto com meu trabalho e ifood, estou esperando um filho em Abril e trabalhando bastante!
-Mas claro, caso seja contratado, meu tempo estará disponível para vocês rsrsrsrsrsrsrsrrs.
-Espero que gostem, fiz o que pude com o tempo que tive.
+Blog Devaleixo: https://blog.devaleixo.com
 
-Acessa ai acessa aiiii (meme):  https://blog.devaleixo.com
+Enfrentei alguns desafios que atrasaram o desenvolvimento:
+
+Problemas com o WSL: Tive dificuldades com a versão de uma biblioteca necessária para começar o projeto com o Rails 8. Identificar e resolver esse problema levou algumas horas.
+
+Problema no Dockerfile: O Dockerfile estava configurado com uma versão antiga do Debian (versão 10), o que gerou incompatibilidade com o thruster devido à versão do libc6 (2.31, enquanto era necessário a versão 2.34). Depois de muitas horas tentando resolver manualmente, percebi que precisava ajustar a base do Dockerfile para RubyVersion_bookworm (versão 11 do Debian). Isso me levou o sábado inteiro, até a 1:30 da madrugada, para concluir o deploy.
+
+Além disso, tive que conciliar o desenvolvimento com meu trabalho, o iFood e o fato de que estou esperando um filho em abril, o que deixou meu tempo ainda mais apertado.
+
+Mensagem Final
+
+Mesmo com as dificuldades, fiz o meu melhor dentro do tempo disponível. Caso seja contratado, poderei dedicar mais tempo e recursos para os projetos Mainô!
+
+Acesse o blog e confira: https://blog.devaleixo.com
+Aproveite também o meme de acesso: Acessa aí, acessa aiiii (cara chato fazendo tatuagem) 😄
