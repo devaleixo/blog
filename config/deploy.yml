@@ -47,6 +47,7 @@ env:
     - DB_HOST
     - POSTGRES_USER
     - POSTGRES_PASSWORD
+    - CLOUDINARY_URL
 
     # Set number of processes dedicated to Solid Queue (default: 1)
     # JOB_CONCURRENCY: 3
